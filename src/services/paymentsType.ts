@@ -1,4 +1,4 @@
-const generatePaymentOfType = async (typeCode) => {
+const generatePaymentOfType = async (typeCode: string) => {
     let dataCob = null;
 
     switch (typeCode) {
@@ -49,6 +49,6 @@ const generatePaymentOfType = async (typeCode) => {
   }
 
 
-  module.exports = {
+export = {
     generatePaymentOfType: generatePaymentOfType,
   };
