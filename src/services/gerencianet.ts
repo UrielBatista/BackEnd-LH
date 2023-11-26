@@ -10,7 +10,7 @@ dotenv.config();
 let tokenExpirationTime: any;
 
 const cert = readFileSync(
-    resolve(`certs\\${process.env.GN_CERT}`)
+    resolve(__dirname, `../../certs/${process.env.GN_CERT}`)
 );
 
 const agent = new Agent({
