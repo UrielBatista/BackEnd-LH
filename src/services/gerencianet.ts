@@ -10,7 +10,7 @@ dotenv.config();
 let tokenExpirationTime: any;
 
 const cert = readFileSync(
-    resolve(__dirname, `../../certs/${process.env.GN_CERT}`)
+    resolve(__dirname, `../../certs/${process.env.GN_CERT_PROD}`)
 );
 
 const agent = new Agent({
@@ -26,7 +26,7 @@ const authenticate = ({ clientID, clientSecret }: any) => {
   
     return axios({
       method: 'POST',
-      url: `${process.env.GN_ENDPOINT}/oauth/token`,
+      url: `${process.env.GN_ENDPOINT_PROD}/oauth/token`,
       headers: {
         Authorization: `Basic ${credentials}`,
         'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ const reAuthenticationApi = async (clientID: any, clientSecret: any) => {
     tokenExpirationTime = Date.now() + 3600 * 1000;
   
     return axios.create({
-      baseURL: process.env.GN_ENDPOINT,
+      baseURL: process.env.GN_ENDPOINT_PROD,
       httpsAgent: agent,
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -61,7 +61,7 @@ const reAuthenticationApi = async (clientID: any, clientSecret: any) => {
     const accessToken = authResponse.data.access_token;
     tokenExpirationTime = Date.now() + 3600 * 1000;
     return axios.create({
-      baseURL: process.env.GN_ENDPOINT,
+      baseURL: process.env.GN_ENDPOINT_PROD,
       httpsAgent: agent,
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -75,7 +75,7 @@ const reAuthenticationApi = async (clientID: any, clientSecret: any) => {
     let expiration = tokenExpirationTime - 300000;
     if (dateTime > expiration) { 
       console.log('gerando novo token');
-      await reAuthenticationApi(process.env.GN_CLIENT_ID, process.env.GN_CLIENT_SECRET);
+      await reAuthenticationApi(process.env.GN_CLIENT_ID_PROD, process.env.GN_CLIENT_SECRET_PROD);
     }
   };
 

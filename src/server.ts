@@ -25,8 +25,8 @@ const prisma = new PrismaClient()
 
 
 const reqGNAlready = GerNet.GNRequest({
-    clientID: process.env.GN_CLIENT_ID,
-    clientSecret: process.env.GN_CLIENT_SECRET
+    clientID: process.env.GN_CLIENT_ID_PROD,
+    clientSecret: process.env.GN_CLIENT_SECRET_PROD
 });
 
 
